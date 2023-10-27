@@ -1,0 +1,40 @@
+﻿using ConsoleApp1;
+
+
+internal class Program
+{
+    static double AtlagTerfogat(List<Henger> hengerek)
+    {
+        double szumTerfogat = 0;
+        foreach (var henger in hengerek)
+        {
+            szumTerfogat += henger.Terfogat();
+        }
+        return szumTerfogat / Henger.SzuletesSzamlalo;
+    }
+
+    static void Lista(List<Henger> hengerek)
+    {
+        foreach (var henger in hengerek)
+        {
+            Console.WriteLine(henger.ToString());
+        }
+    }
+    static void Main(string[] args)
+    {
+        List<Henger> testek = new List<Henger>();
+        testek.Add(new Henger(1, 4));
+
+        testek.Add(new TomorHenger(0.5, 4, 2));
+        testek.Add(new TomorHenger(0.5, 4));
+        
+        testek.Add(new Cso(5, 5, 0.5));
+        //A 0.5-öt és a 2-öt kitöröltem, mert a feladatban csak kettő, illetve 3 paraméteres konstruktor van, 4 paraméteres nem is lehetséges
+        // illetve az 1-es falvastagság a két paraméters konstruktor használatát indikálja, mert ennél ez az alpérték
+        testek.Add(new Cso(5, 5));
+        Lista(testek);
+        Console.WriteLine("Testek száma:" + testek.Count);
+        Console.WriteLine("Létrehozott hengerek száma:" + Henger.SzuletesSzamlalo);
+        Console.WriteLine($"Átlag térfogat: {AtlagTerfogat(testek):N2}");
+    }
+}
